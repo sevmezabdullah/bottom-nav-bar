@@ -3,6 +3,8 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -13,31 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         tasarim = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        toplama.setOnClickListener {
-            val alinanSayi = birinciSayi.text.toString()
-            val alinanSayi2 = ikinciSayi.text.toString()
+    val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
 
-            val sayi1 = alinanSayi.toInt()
-            val sayi2 = alinanSayi2.toInt()
-
-            val toplam = sayi1 + sayi2
-
-            sonuc.text = toplam.toString()
-        }
-        carpma.setOnClickListener {
-
-            val alinanSayi = birinciSayi.text.toString()
-            val alinanSayi2 = ikinciSayi.text.toString()
-
-            val sayi1 = alinanSayi.toInt()
-            val sayi2 = alinanSayi2.toInt()
-
-            val carpim = sayi1 * sayi2
-
-            sonuc.text = carpim.toString()
-
-        }
-
+        NavigationUI.setupWithNavController(bottomNavigationView,navHostFragment.navController)
 
     }
 }
